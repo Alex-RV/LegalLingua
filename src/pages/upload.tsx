@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { convertPDFToPNG } from '../../lib/utils'; 
+import { convertPDFToText } from '../../lib/utils'; 
 
 export default function Upload() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -13,9 +13,10 @@ export default function Upload() {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (selectedFile) {
-      convertPDFToPNG(selectedFile);
+      const text = await convertPDFToText(selectedFile);
+      console.log(text)
     } else {
       alert('Please select a PDF file to upload.');
     }
