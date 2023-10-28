@@ -1,8 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createWorker } from 'tesseract.js';
 import * as pdfjs from 'pdfjs-dist';
+import { getDocument, GlobalWorkerOptions, PDFDocumentProxy } from 'pdfjs-dist';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// Import the worker as a string
+import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.js';
+
+// Setup the worker for PDF.js
+const pdfjsWorkerBlob = new Blob([pdfWorker], { type: 'application/javascript' });
+const pdfjsWorkerURL = URL.createObjectURL(pdfjsWorkerBlob);
+GlobalWorkerOptions.workerSrc = pdfjsWorkerURL;
+
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 function isError(error: unknown): error is Error {
     return error instanceof Error;
   }
