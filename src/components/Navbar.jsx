@@ -42,9 +42,7 @@ const Navbar = () => {
           <li className='p-4'>
             <Link href='/translate'>Translate</Link>
           </li>
-          <li className='p-4'>
-            <Link href='/contact'>Contact</Link>
-          </li>
+          
         </ul>
 
         {/* Mobile Button */}
@@ -70,9 +68,7 @@ const Navbar = () => {
             <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
               <Link href='/#translate'>Translate</Link>
             </li>
-            <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
-              <Link href='/contact'>Contact</Link>
-            </li>
+            
           </ul>
         </div>
       </div>

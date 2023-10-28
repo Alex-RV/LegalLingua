@@ -3,7 +3,10 @@ import { convertPDFToText } from '../../lib/utils';
 import {performInference} from '../../lib/fetches';
 import Head from 'next/head';
 import Hero from '../components/Hero';
-import LanguageSelector from '../components/LanguageSelector'; // Correct import path
+import LanguageSelector from '../components/LanguageSelector';
+import LoadingSpinner from '../components/Loading';
+import TranslationForm from '../components/TranslationForm';
+
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -44,12 +47,17 @@ const languages = [
 
 
 export default function Home() {
-  const [selectedLanguage, setSelectedLanguage] = useState(''); // Add this line
+  const [selectedLanguage, setSelectedLanguage] = useState(''); 
+  const [loading, setLoading] = useState(false);
+  const [translationOutput, setTranslationOutput] = useState(false);
+
 
   const handleLanguageChange = (language: React.SetStateAction<string>) => {
     console.log('Selected Language:', language);
     setSelectedLanguage(language);
   };
+
+ 
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const lang = 'Spanish';
@@ -64,7 +72,9 @@ export default function Home() {
   };
 
   const handleUpload = async () => {
+    setLoading(true);
     if (selectedFile) {
+      try{ 
       const text = await convertPDFToText(selectedFile);
       const summary = await performInference(
         "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
@@ -75,30 +85,34 @@ export default function Home() {
         "togethercomputer/RedPajama-INCITE-7B-Chat",
         `Q: Translate the following to ${lang}, only output the ${lang} text: ${summary}\nA:`
       );
-      
+      setTranslationOutput(true);
       console.log("translation:", translation);
       
       console.log(text)
+      }catch(error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+      
     } else {
       alert('Please select a PDF file to upload.');
+      setLoading(false);
     }
   };
 
   return (
+    
     <div>
       <Head>
         <title>Legalingua</title>
         <meta name='description' content='Generated Legalingua' />
       </Head>
       <Hero heading='Translate' message='Here you can try it out' />
-
+      
       <div className="min-h-screen flex flex-col items-center justify-center mt-8">
         <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Add your file...</h2>
-          <p className="text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
-          </p>
+          <h2 className="text-2xl font-bold mb-25">Add your file...</h2>
         </div>
         {/* Input file element */}
         <label className="cursor-pointer border-2 border-dashed rounded-md p-4">
@@ -107,7 +121,7 @@ export default function Home() {
             className="hidden"
             onChange={handleFileChange}
           />
-          <span className="text-gray-700">Choose a file</span>
+          <span className="text-gray-700 ">Choose a file</span>
         </label>
 
         {/* Display the selected file name, if any */}
@@ -118,17 +132,28 @@ export default function Home() {
 
         {/* Language Selector */}
         <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Select your Language</h2>
+          <h2 className="text-2xl font-bold mb-10">Select your Language</h2>
         </div>
 
         <LanguageSelector
+        
           languages={languages}
           onSelectLanguage={handleLanguageChange}
+          
         />
 
-       <button onClick={() => {
+        <div>
+        {translationOutput && <TranslationForm/>}
+        {loading && <LoadingSpinner/>}
+        {selectedLanguage !== '' && <button onClick={() => {
           handleUpload;
-        }} className='border shadow-lg p-3 w-full mt-2'>Submit</button>
+          setLoading(true);
+        }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
+        </div>
+        
+        
+
+   
       </div>
     </div>
   );
