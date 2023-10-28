@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Hero from '../components/Hero';
 import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
-import TranslationForm from '../components/TranslationForm';
+import  ChatDisplay from '../components/ChatDisplay';
 
 import { InferenceResponse } from '../../lib/interfaces';
 
@@ -50,7 +50,7 @@ const languages = [
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState(''); 
   const [loading, setLoading] = useState(false);
-  const [translationOutput, setTranslationOutput] = useState(false);
+ 
 
 
   const handleLanguageChange = (language: React.SetStateAction<string>) => {
@@ -58,7 +58,9 @@ export default function Home() {
     setSelectedLanguage(language);
   };
 
-  const [chatText, setChatText] = useState('');
+  
+  const [summary, setSummary] = useState('');
+  const [translation, setTranslation] = useState('');
 
  
   
@@ -88,15 +90,13 @@ export default function Home() {
       const summaryText = summary?.output.choices[0].text || ''; // Getting the summary response text
       
       setLoading(true);
-      setChatText(''); // Clearing the chat text
+      setSummary(''); // Clearing the chat text
       
       for (let i = 0; i < summaryText.length; i++) {
         setTimeout(() => {
-          setChatText((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
+          setSummary((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
         }, i * 100); // Delay the execution to create a typing effect
       }
-      
-      setTranslationOutput(true);
       
       
       const translation: InferenceResponse | null = await performInference(
@@ -107,7 +107,13 @@ export default function Home() {
         undefined,
         1000
       );
-      setTranslationOutput(true);
+      setTranslation(''); // Clearing the chat text
+      
+      for (let i = 0; i < summaryText.length; i++) {
+        setTimeout(() => {
+          setTranslation((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
+        }, i * 100); // Delay the execution to create a typing effect
+      }
       console.log("translation:", translation?.output.choices[0].text);
       
       }catch(error) {
@@ -162,20 +168,21 @@ export default function Home() {
           onSelectLanguage={handleLanguageChange}
           
         />
+        
 
         <div>
-        {translationOutput && <TranslationForm/>}
+     
         {loading && <LoadingSpinner/>}
         {selectedLanguage !== '' && <button onClick={() => {
           handleUpload();
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
         <div className="border shadow-lg p-3 w-full mt-2">
-          <textarea
-            className="h-32 p-2 border rounded resize-none"
-            readOnly
-            value={chatText} // Display the chat text in the textarea or a div
-          />
+          
+          <ChatDisplay title={"Summary"} chatText={summary} /> 
+          <ChatDisplay title={ "Native" } chatText = {translation} /> 
+          
+          
         </div>
         </div>
       </div>
