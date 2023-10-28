@@ -61,7 +61,6 @@ export default function Home() {
  
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const lang = 'Spanish';
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -74,7 +73,7 @@ export default function Home() {
 
   const handleUpload = async () => {
     setLoading(true);
-    console.log(selectedFile);
+    console.log("FIle",selectedFile);
     if (selectedFile) {
       try{ 
       const text = await convertPDFToText(selectedFile);
@@ -89,7 +88,7 @@ export default function Home() {
       const translation: InferenceResponse | null = await performInference(
         "togethercomputer/RedPajama-INCITE-7B-Chat",
         `Q: Translate the following to ${selectedLanguage}, only output the ${selectedLanguage} text: ${summary?.output.choices[0].text}\nA:`,
-        undefined,
+        0.2,
         undefined,
         undefined,
         1000
@@ -154,7 +153,7 @@ export default function Home() {
         {translationOutput && <TranslationForm/>}
         {loading && <LoadingSpinner/>}
         {selectedLanguage !== '' && <button onClick={() => {
-          handleUpload;
+          handleUpload();
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
         </div>
