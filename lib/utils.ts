@@ -11,6 +11,22 @@ const transcribeImage = async (pngDataUrl: string) => {
   return text;
 };
 
+const GVTI = async(pngDataUrl:string) =>{
+    const response = await fetch('https://alex-riabov.vercel.app/api/upload-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          responseType: "arraybuffer",
+          responseEncoding: "binary",
+        },
+        body: JSON.stringify({ pngDataUrl }),
+      });
+    
+      const data = await response.json();
+      const text = data && data.text ? data.text : [];
+      return text;
+}
+
 export const convertPDFToText = async (pdfFile: File) => {
   return new Promise<string>(async (resolve, reject) => {
     const fileReader = new FileReader();
@@ -41,7 +57,8 @@ export const convertPDFToText = async (pdfFile: File) => {
           await page.render(renderContext).promise;
 
           const pngDataUrl = canvas.toDataURL('image/png');
-          const page_text = await transcribeImage(pngDataUrl);
+        //   const page_text = await transcribeImage(pngDataUrl);
+          const page_text = await GVTI(pngDataUrl);
 
           // Concatenate the text from each page
           allText += page_text;
