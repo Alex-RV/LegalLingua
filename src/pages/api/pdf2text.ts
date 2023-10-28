@@ -36,34 +36,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 async function extractTextFromPDF(pdfBuffer: Buffer): Promise<string> {
-  try {
-    const loadingTask = pdfjs.getDocument(new Uint8Array(pdfBuffer));
-    const pdf = await loadingTask.promise;
-    const numPages = pdf.numPages;
-    let extractedText = '';
-
-    for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-      const page = await pdf.getPage(pageNumber);
-      const viewport = page.getViewport({ scale: 1.0 });
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-
-      await page.render({ canvasContext: context, viewport: viewport }).promise;
-
-      const pngDataUrl = canvas.toDataURL('image/png');
-      extractedText += await transcribeImage(pngDataUrl);
+    try {
+      const loadingTask = pdfjs.getDocument(new Uint8Array(pdfBuffer));
+      const pdf = await loadingTask.promise;
+      const numPages = pdf.numPages;
+      let extractedText = '';
+  
+      for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
+        const page = await pdf.getPage(pageNumber);
+        const textContent = await page.getTextContent();
+        extractedText += textContent.items.map(item => {
+        if ('str' in item) {
+            return item.str;
+        }
+        return '';
+        }).join(' ');
+      }
+  
+      return extractedText;
+    } catch (err) {
+      console.error('Error in extractTextFromPDF:', err);
+      const errorMessage = isError(err) ? err.message : 'An unknown error occurred';
+      throw new Error(`Error in extractTextFromPDF: ${errorMessage}`);
     }
-
-    return extractedText;
-  } catch (err) {
-    console.error('Error in extractTextFromPDF:', err);
-    const errorMessage = isError(err) ? err.message : 'An unknown error occurred';
-    throw new Error(`Error in extractTextFromPDF: ${errorMessage}`);
   }
-}
+  
 
 async function transcribeImage(pngDataUrl: string): Promise<string> {
   try {
