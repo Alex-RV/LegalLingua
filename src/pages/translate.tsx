@@ -58,8 +58,10 @@ export default function Home() {
     setSelectedLanguage(language);
   };
 
- 
+  const [chatText, setChatText] = useState('');
 
+ 
+  
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const lang = 'Spanish';
 
@@ -84,7 +86,19 @@ export default function Home() {
         `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
       );
       
-      console.log("Summary:", summary?.output.choices[0].text);
+      const summaryText = summary?.output.choices[0].text || ''; // Getting the summary response text
+      
+      setLoading(true);
+      setChatText(''); // Clearing the chat text
+      
+      for (let i = 0; i < summaryText.length; i++) {
+        setTimeout(() => {
+          setChatText((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
+        }, i * 100); // Delay the execution to create a typing effect
+      }
+      
+      setTranslationOutput(true);
+      
       
       const translation: InferenceResponse | null = await performInference(
         "togethercomputer/RedPajama-INCITE-7B-Chat",
@@ -157,8 +171,16 @@ export default function Home() {
           handleUpload;
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
+        <div className="border shadow-lg p-3 w-full mt-2">
+          <textarea
+            className="h-32 p-2 border rounded resize-none"
+            readOnly
+            value={chatText} // Display the chat text in the textarea or a div
+          />
+        </div>
         </div>
       </div>
     </div>
   );
 }
+
