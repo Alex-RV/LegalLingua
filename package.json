@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "next": "14.0.0",
+    "pdfjs-dist": "^3.11.174",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tesseract.js": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pdfjs-dist": "^2.10.378",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.16",
