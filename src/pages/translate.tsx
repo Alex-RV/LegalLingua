@@ -22,22 +22,12 @@ export default function Home() {
       const text = await convertPDFToText(selectedFile);
       const summary = await performInference(
         "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
-        `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`,
-        0.8,
-        0.7,
-        50,
-        1,
-        1
+        `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
       );
       
       const translation = await performInference(
         "togethercomputer/RedPajama-INCITE-7B-Chat",
-        `Q: Translate the following to ${lang}, only output the ${lang} text: ${summary}\nA:`,
-        0.8,
-        0.7,
-        50,
-        250,
-        1
+        `Q: Translate the following to ${lang}, only output the ${lang} text: ${summary}\nA:`
       );
       
       console.log("translation:", translation);
