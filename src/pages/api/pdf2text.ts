@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createWorker } from 'tesseract.js';
 import * as pdfjs from 'pdfjs-dist';
-import { buffer } from 'micro'; // New import for manual body parsing
+import { buffer } from 'micro';
 import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.js';
 
 // Setup the worker for PDF.js
