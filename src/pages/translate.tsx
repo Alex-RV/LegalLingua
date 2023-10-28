@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { convertPDFToPNG } from '../../lib/utils'; 
+import { convertPDFToText } from '../../lib/utils'; 
+import {performInference} from '../../lib/fetches';
 import Head from 'next/head';
 import Hero from '../components/Hero';
 import LanguageSelector from '../components/LanguageSelector'; // Correct import path
@@ -51,6 +52,7 @@ export default function Home() {
   };
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const lang = 'Spanish';
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -61,11 +63,22 @@ export default function Home() {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (selectedFile) {
-      convertPDFToPNG(selectedFile);
-
+      const text = await convertPDFToText(selectedFile);
+      const summary = await performInference(
+        "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
+        `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
+      );
       
+      const translation = await performInference(
+        "togethercomputer/RedPajama-INCITE-7B-Chat",
+        `Q: Translate the following to ${lang}, only output the ${lang} text: ${summary}\nA:`
+      );
+      
+      console.log("translation:", translation);
+      
+      console.log(text)
     } else {
       alert('Please select a PDF file to upload.');
     }
