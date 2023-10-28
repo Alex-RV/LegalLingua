@@ -11,6 +11,7 @@ export async function performInference(
   ): Promise<InferenceResponse | null> {
     const apiUrl = "https://api.together.xyz/inference";
     const token = process.env.NEXT_PUBLIC_TOGETHERAI_KEY;
+    console.log("Token: ",token)
   
     const headers = {
       Authorization: `Bearer ${token}`,
