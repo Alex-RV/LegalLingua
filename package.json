@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "micro": "^10.0.1",
     "next": "14.0.0",
     "pdfjs-dist": "^3.11.174",
     "react": "^18",
