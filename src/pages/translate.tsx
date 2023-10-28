@@ -1,22 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { convertPDFToPNG } from '../../lib/utils'; 
 import Head from 'next/head';
 import Hero from '../components/Hero';
- // Import the utility function
-import { SliderData } from '../components/SliderData';
 
 export default function Home() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [pdfText, setPdfText] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type === 'application/pdf') {
+      setSelectedFile(file);
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  };
 
-    // Extract text from the PDF file
-    const text = await extractTextFromPDF(file.path);
-    setPdfText(text);
-
-    // You can further process or save the extracted text as needed
+  const handleUpload = () => {
+    if (selectedFile) {
+      convertPDFToPNG(selectedFile);
+    } else {
+      alert('Please select a PDF file to upload.');
+    }
   };
 
   return (
@@ -24,7 +28,6 @@ export default function Home() {
       <Head>
         <title>Legalingua</title>
         <meta name='description' content='Generated Legalingua' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <Hero heading='Translate' message='Here you can try it out' />
 
@@ -36,9 +39,9 @@ export default function Home() {
             Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
           </p>
           {/* Display the extracted text, if available */}
-          {pdfText && (
+          {/* {pdfText && (
             <p className="mt-4 text-gray-600">Extracted Text: {pdfText}</p>
-          )}
+          )} */}
         </div>
         {/* Input file element */}
         <label className="cursor-pointer border-2 border-dashed rounded-md p-4">

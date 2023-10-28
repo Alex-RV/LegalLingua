@@ -7,7 +7,6 @@ export default function Home() {
       <Head>
         <title>Legalingua</title>
         <meta name='description' content='Generated Legalingua' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <Hero heading='' message='Trust what you sign' />
 
@@ -17,7 +16,6 @@ export default function Home() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
         </p>
-        {/* Add more paragraphs or information as needed */}
       </div>
 
       <div className="mt-8 text-center">
@@ -26,7 +24,6 @@ export default function Home() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
         </p>
-        {/* Add more paragraphs or information as needed */}
       </div>
 
       <div className="mt-8 text-center">
@@ -35,7 +32,6 @@ export default function Home() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
         </p>
-        {/* Add more paragraphs or information as needed */}
       </div>
     </div>
   );
