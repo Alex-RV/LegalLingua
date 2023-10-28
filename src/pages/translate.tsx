@@ -4,6 +4,7 @@ import {performInference} from '../../lib/fetches';
 import Head from 'next/head';
 import Hero from '../components/Hero';
 import LanguageSelector from '../components/LanguageSelector'; // Correct import path
+import { InferenceResponse } from '../../lib/interfaces';
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -64,25 +65,34 @@ export default function Home() {
   };
 
   const handleUpload = async () => {
+    console.log(selectedFile);
     if (selectedFile) {
       const text = await convertPDFToText(selectedFile);
-      const summary = await performInference(
+      console.log(text);
+      const summary: InferenceResponse | null = await performInference(
         "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
         `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
       );
       
-      const translation = await performInference(
+      console.log("Summary:", summary?.output.choices[0].text);
+      
+      const translation: InferenceResponse | null = await performInference(
         "togethercomputer/RedPajama-INCITE-7B-Chat",
-        `Q: Translate the following to ${lang}, only output the ${lang} text: ${summary}\nA:`
+        `Q: Translate the following to ${selectedLanguage}, only output the ${selectedLanguage} text: ${summary?.output.choices[0].text}\nA:`,
+        undefined,
+        undefined,
+        undefined,
+        1000
       );
-      
+  
       console.log("translation:", translation);
-      
-      console.log(text)
+  
+      console.log(text);
     } else {
       alert('Please select a PDF file to upload.');
     }
   };
+  
 
   return (
     <div>
@@ -126,9 +136,10 @@ export default function Home() {
           onSelectLanguage={handleLanguageChange}
         />
 
-       <button onClick={() => {
-          handleUpload;
-        }} className='border shadow-lg p-3 w-full mt-2'>Submit</button>
+<button onClick={handleUpload} className='border shadow-lg p-3 w-full mt-2'>
+  Submit
+</button>
+
       </div>
     </div>
   );
