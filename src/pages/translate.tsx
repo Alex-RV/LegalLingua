@@ -2,8 +2,54 @@ import React, { useState } from 'react';
 import { convertPDFToPNG } from '../../lib/utils'; 
 import Head from 'next/head';
 import Hero from '../components/Hero';
+import LanguageSelector from '../components/LanguageSelector'; // Correct import path
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Spanish' },
+  { code: 'fr', name: 'French' },
+  { code: 'de', name: 'German' },
+  { code: 'pt', name: 'Portuguese' },
+  { code: 'it', name: 'Italian' },
+  { code: 'nl', name: 'Dutch' },
+  { code: 'sv', name: 'Swedish' },
+  { code: 'da', name: 'Danish' },
+  { code: 'no', name: 'Norwegian' },
+  { code: 'fi', name: 'Finnish' },
+  { code: 'is', name: 'Icelandic' },
+  { code: 'el', name: 'Greek' },
+  { code: 'ru', name: 'Russian' },
+  { code: 'pl', name: 'Polish' },
+  { code: 'cs', name: 'Czech' },
+  { code: 'hu', name: 'Hungarian' },
+  { code: 'ro', name: 'Romanian' },
+  { code: 'bg', name: 'Bulgarian' },
+  { code: 'tr', name: 'Turkish' },
+  { code: 'ar', name: 'Arabic' },
+  { code: 'he', name: 'Hebrew' },
+  { code: 'hi', name: 'Hindi' },
+  { code: 'bn', name: 'Bengali' },
+  { code: 'ja', name: 'Japanese' },
+  { code: 'ko', name: 'Korean' },
+  { code: 'zh', name: 'Chinese' },
+  { code: 'vi', name: 'Vietnamese' },
+  { code: 'th', name: 'Thai' },
+  { code: 'id', name: 'Indonesian' },
+  { code: 'ms', name: 'Malay' },
+  { code: 'fil', name: 'Filipino' },
+  { code: 'sw', name: 'Swahili' },
+  
+];
+
 
 export default function Home() {
+  const [selectedLanguage, setSelectedLanguage] = useState(''); // Add this line
+
+  const handleLanguageChange = (language: React.SetStateAction<string>) => {
+    console.log('Selected Language:', language);
+    setSelectedLanguage(language);
+  };
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +64,8 @@ export default function Home() {
   const handleUpload = () => {
     if (selectedFile) {
       convertPDFToPNG(selectedFile);
+
+      
     } else {
       alert('Please select a PDF file to upload.');
     }
@@ -38,10 +86,6 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Proin vestibulum, quam eget fermentum tincidunt, dui massa fermentum velit.
           </p>
-          {/* Display the extracted text, if available */}
-          {/* {pdfText && (
-            <p className="mt-4 text-gray-600">Extracted Text: {pdfText}</p>
-          )} */}
         </div>
         {/* Input file element */}
         <label className="cursor-pointer border-2 border-dashed rounded-md p-4">
@@ -54,9 +98,24 @@ export default function Home() {
         </label>
 
         {/* Display the selected file name, if any */}
+        
         {selectedFile && (
           <p className="mt-4 text-gray-600">Selected File: {selectedFile.name}</p>
         )}
+
+        {/* Language Selector */}
+        <div className="mt-8 text-center">
+          <h2 className="text-2xl font-bold mb-4">Select your Language</h2>
+        </div>
+
+        <LanguageSelector
+          languages={languages}
+          onSelectLanguage={handleLanguageChange}
+        />
+
+       <button onClick={() => {
+          handleUpload;
+        }} className='border shadow-lg p-3 w-full mt-2'>Submit</button>
       </div>
     </div>
   );
