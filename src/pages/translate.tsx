@@ -85,7 +85,7 @@ export default function Home() {
         1000
       );
   
-      console.log("translation:", translation);
+      console.log("translation:", translation?.output.choices[0].text);
   
       console.log(text);
     } else {
