@@ -14,7 +14,7 @@ const LanguageSelector = ({ languages: languages, onSelectLanguage }) => {
     <select value={selectedLanguage} onChange={handleLanguageChange}>
       <option value="" disabled>Select Language</option>
       {languages.map((lang) => (
-        <option key={lang.code} value={lang.code}>{lang.name}</option>
+        <option key={lang.code} value={lang.name}>{lang.name}</option>
       ))}
     </select>
   );
