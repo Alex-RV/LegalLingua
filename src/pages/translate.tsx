@@ -91,7 +91,7 @@ export default function Home() {
             // Serialize the loaded PDF (this will inherently compress the PDF)
             const compressedPdfBytes = await pdfDoc.save();
 
-            const sizeLimitMB = 10;
+            const sizeLimitMB = 2;
             const sizeLimitBytes = sizeLimitMB * 1024 * 1024;
             console.log(compressedPdfBytes.length);
 
@@ -170,66 +170,48 @@ export default function Home() {
 };
 
 
-  return (
+return (
+  <div className="container w-full min-w-full ">
+    <Head>
+      <title>Legalingua</title>
+      <meta name='description' content='Generated Legalingua' />
+    </Head>
     
-    <div>
-      <Head>
-        <title>Legalingua</title>
-        <meta name='description' content='Generated Legalingua' />
-      </Head>
-      <Hero heading='Translate' message='Here you can try it out' />
+    <Hero heading='Translate' message='Experience it live' />
+    
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 max-w-4xl">
+      <div className="mt-8 text-center">
+        <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
+      </div>
+
+      <label className="cursor-pointer border-2 border-dashed rounded-md p-4 mb-4">
+        <input type="file" className="hidden" onChange={handleFileChange} />
+        <span className="text-gray-700">Select a file</span>
+      </label>
       
-      <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8">
-        <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-3">Add your file...</h2>
-        </div>
-        {/* Input file element */}
-        <label className="cursor-pointer border-2 border-dashed rounded-md p-4">
-          <input
-            type="file"
-            className="hidden"
-            onChange={handleFileChange}
-          />
-          <span className="text-gray-700 ">Choose a file</span>
-        </label>
+      {selectedFile && (
+        <p className="mt-4 text-gray-600">Selected: {selectedFile.name}</p>
+      )}
 
-        {/* Display the selected file name, if any */}
-        
-        {selectedFile && (
-          <p className="mt-4 text-gray-600">Selected File: {selectedFile.name}</p>
-        )}
+      <h2 className="text-2xl font-bold mb-3 mt-8">Select a Language</h2>
+      <LanguageSelector languages={languages} onSelectLanguage={handleLanguageChange} />
 
-        {/* Language Selector */}
-        <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-10">Select your Language</h2>
-        </div>
+      {loading && <LoadingSpinner />}
+      
+      {selectedLanguage && (
+        <button 
+          onClick={handleUpload} 
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
+        >
+          Translate
+        </button>
+      )}
 
-        <LanguageSelector
-        
-          languages={languages}
-          onSelectLanguage={handleLanguageChange}
-          
-        />
-        
-
-        <div className=''>
-     
-        {loading && <LoadingSpinner/>}
-        {selectedLanguage !== '' && <button onClick={() => {
-          handleUpload();
-          setLoading(true);
-        }} className='border shadow-lg p-3 w-full mt-2 rounded-md'>Submit</button>}
-        
-        <div className="border shadow-lg p-3 w-full mt-9 " style={{display: 'flex', flexDirection:'row'}}>
-          
-            <TextArea title={"Summary"}  chatText={summary} /> 
-            <TextArea  title={"Translation"} chatText = {translation} /> 
-          
-          
-        </div>
-        
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
+        <TextArea title="Summary" chatText={summary} /> 
+        <TextArea title="Translation" chatText={translation} /> 
       </div>
     </div>
-  );
+  </div>
+);
 }
