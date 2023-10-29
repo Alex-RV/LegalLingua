@@ -6,7 +6,7 @@ export async function performInference(
     temperature: number = 0.7,
     top_p: number = 0.7,
     top_k: number = 50,
-    max_tokens: number = 1000,
+    max_tokens: number = 500,
     repetition_penalty: number = 1
   ): Promise<InferenceResponse | null> {
     const apiUrl = "https://api.together.xyz/inference";

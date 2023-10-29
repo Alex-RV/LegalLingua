@@ -34,7 +34,7 @@ export default function Home() {
             No more second-guessing.
           </>
         }
-        redirect={<Link className="text-white" href="/translate">Try LegalLingua</Link>}
+        redirect={<Link className="text-white" href="/translate#translate">Try LegalLingua</Link>}
       />
       <div className="border shadow-lg p-30 w-full mt-9 flex-row">
         <AccordionComponent />

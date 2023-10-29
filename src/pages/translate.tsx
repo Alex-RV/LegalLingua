@@ -55,6 +55,7 @@ const languages = [
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState(''); 
   const [loading, setLoading] = useState(false);
+  const [selectedModel, setSelectedModel] = useState("llama-2-7b-chat-2023-10-28-11-55-42");
  
 
 
@@ -119,11 +120,17 @@ export default function Home() {
             console.log("TEXT", text);
 
             let summary;
+            let prompt = "";
+            if (selectedModel === "llama-2-7b-chat-2023-10-28-11-55-42") {
+                prompt = `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`;
+            } else if (selectedModel === "LLaMA-2-7B-32K-2023-10-28-22-52-16") {
+                prompt = `summarize this text and give your answer between <summary></summary> tags. text: ${text} <summary>`;
+            }
             try {
                 summary = await performInference(
-                    "randolfuy09@gmail.com/llama-2-13b-chat-2023-10-29-11-19-30",
-                    `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
-                );
+                  `randolfuy09@gmail.com/${selectedModel}`,
+                  prompt
+              );
             } catch (err) {
                 throw new Error("Error performing inference for summary: " + err);
             }
@@ -197,16 +204,25 @@ return (
 
       <h2 className="text-2xl font-bold mb-3 mt-8">Select a Language</h2>
       <LanguageSelector languages={languages} onSelectLanguage={handleLanguageChange} />
+      <h2 className="text-2xl font-bold mb-3 mt-8">Select a Model</h2>
+      <select 
+        value={selectedModel}
+        onChange={(e) => setSelectedModel(e.target.value)}
+        className="mb-4 p-2 border rounded-md"
+      >
+        <option value="llama-2-7b-chat-2023-10-28-11-55-42">Llama 2-7b (Stable: Best for key points and highlighting important values)</option>
+        <option value="LLaMA-2-7B-32K-2023-10-28-22-52-16">LLaMA-2-7B-32K (Summarization: Best for compressing large texts and minimalizing)</option>
+      </select>
 
       {loading && <LoadingSpinner />}
       
       {selectedLanguage && (
         <button 
-          onClick={handleUpload} 
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
-        >
-          Translate
-        </button>
+        onClick={handleUpload} 
+        className='bg-sky-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
+      >
+        Translate
+      </button>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
