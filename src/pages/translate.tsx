@@ -214,11 +214,15 @@ return (
       <select 
         value={selectedModel}
         onChange={(e) => setSelectedModel(e.target.value)}
-        className="mb-4 p-2 border rounded-md"
-      >
-        <option value="llama-2-7b-chat-2023-10-28-11-55-42">Llama 2-7b (Stable: Best for key points and highlighting important values)</option>
-        <option value="LLaMA-2-7B-32K-2023-10-28-22-52-16">LLaMA-2-7B-32K (Summarization: Best for compressing large texts and minimalizing)</option>
-      </select>
+        className="mb-4 p-2 border rounded-md w-full text-sm md:text-base"
+    >
+        <option value="llama-2-7b-chat-2023-10-28-11-55-42">
+            Llama 2-7b (Stable: Key points & highlights)
+        </option>
+        <option value="LLaMA-2-7B-32K-2023-10-28-22-52-16">
+            LLaMA-2-7B-32K (Summarization: Compress & minimalize)
+        </option>
+    </select>
 
       {loading && <LoadingSpinner />}
       
