@@ -108,13 +108,14 @@ export default function Home() {
       );
       setTranslation(''); // Clearing the chat text
       
+      if(translation){
       for (let i = 0; i < translation?.output.choices[0].text.length; i++) {
         setTimeout(() => {
           setTranslation((prevText) => prevText + translation?.output.choices[0].text[i]); // Update the chat text one letter at a time
         }, i * 10); // Delay the execution to create a typing effect
       }
       console.log("translation:", translation?.output.choices[0].text);
-      
+      }
       }catch(error) {
         console.error("Error:", error);
       } finally {
