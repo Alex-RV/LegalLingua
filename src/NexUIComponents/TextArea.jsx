@@ -6,7 +6,7 @@ export default function App({title, chatText }) {
     <Textarea
       label= {title}
       labelPlacement="outside"
-      placeholder="Enter your description"
+      placeholder="Text will appear here"
       className="border shadow-lg p-3 w-full mt-2"
       value={chatText}
     />

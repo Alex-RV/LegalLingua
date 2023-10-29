@@ -179,9 +179,9 @@ export default function Home() {
       </Head>
       <Hero heading='Translate' message='Here you can try it out' />
       
-      <div className="min-h-screen flex flex-col items-center justify-center mt-8">
+      <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8">
         <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-25">Add your file...</h2>
+          <h2 className="text-2xl font-bold mb-3">Add your file...</h2>
         </div>
         {/* Input file element */}
         <label className="cursor-pointer border-2 border-dashed rounded-md p-4">
@@ -212,15 +212,15 @@ export default function Home() {
         />
         
 
-        <div>
+        <div className=''>
      
         {loading && <LoadingSpinner/>}
         {selectedLanguage !== '' && <button onClick={() => {
           handleUpload();
           setLoading(true);
-        }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
+        }} className='border shadow-lg p-3 w-full mt-2 rounded-md'>Submit</button>}
         
-        <div className="border shadow-lg p-3 w-full mt-9" style={{display: 'flex', flexDirection:'row'}}>
+        <div className="border shadow-lg p-3 w-full mt-9 " style={{display: 'flex', flexDirection:'row'}}>
           
             <TextArea title={"Summary"}  chatText={summary} /> 
             <TextArea  title={"Translation"} chatText = {translation} /> 

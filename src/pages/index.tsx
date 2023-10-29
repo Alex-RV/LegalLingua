@@ -22,7 +22,7 @@ export default function Home() {
         <title>Legalingua</title>
         <meta name='description' content='Generated Legalingua' />
       </Head>
-      <Hero heading='Trust me' message='You can Sign' />
+      <Hero heading='LegalLingua' message='AI tool that instantly explains your legal document to you, in your language of choice. No more second-guessing.' />
       <div className="border shadow-lg p-30 w-full mt-9" style={{ display: 'flex', flexDirection: 'row' }}>
         <Accordion/>
         <div className="border shadow-lg p-3">
