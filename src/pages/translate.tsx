@@ -9,6 +9,7 @@ import  ChatDisplay from '../components/ChatDisplay';
 import ProgressBar from '../NexUIComponents/ProgressBar';
 import Table from '../NexUIComponents/Table'
 import Input from '../NexUIComponents/input';
+import Button from '../NexUIComponents/Button';
 
 import { InferenceResponse } from '../../lib/interfaces';
 
@@ -179,11 +180,12 @@ export default function Home() {
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
         <div className="border shadow-lg p-3 w-full mt-2">
           
-          <ChatDisplay title={"Summary"} chatText={summary} /> 
-          <ChatDisplay title={ "Native" } chatText = {translation} /> 
+          <ChatDisplay  chatText={summary} /> 
+          <ChatDisplay  chatText = {translation} /> 
           <ProgressBar/>
           <Table/>
           <Input/>
+          
           
         </div>
         </div>
