@@ -4,8 +4,7 @@ import Hero from "../components/Hero";
 import AccordionComponent from "../NexUIComponents/Acordion";
 import TextArea from "../NexUIComponents/TextArea";
 import { Link } from "@nextui-org/react";
-import Table from '../NexUIComponents/Table';
-
+import Table from "../NexUIComponents/Table";
 
 export default function Home() {
   const [summary, setSummary] = useState("");
@@ -37,16 +36,28 @@ export default function Home() {
             No more second-guessing.
           </>
         }
-        redirect={<Link className="text-white" href="/translate#translate">Try LegalLingua</Link>}
+        redirect={
+          <Link className="text-white" href="/translate#translate">
+            Try LegalLingua
+          </Link>
+        }
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
         <AccordionComponent />
-        <div className="border shadow-lg p-3">
-          <h3>HELLO WORLD!</h3>
+        <div className="pr-3">
+          <div className="blue-text font-bold text-center py-2 text-lg">
+            LegalLingua in Action
+          </div>
           <TextArea title="Summary" chatText={summary} />
-          <Table/>
+
+          <div className="py-2">
+            <div className="blue-text font-bold text-center py-2 text-lg">
+              LegalLingua Stories
+            </div>
+            <Table />
+          </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 }

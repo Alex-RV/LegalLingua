@@ -36,7 +36,7 @@ export default function App() {
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="translate" aria-current="page">
+            <Link className="blue-text" href="translate" aria-current="page">
               Translate
             </Link>
           </NavbarItem>

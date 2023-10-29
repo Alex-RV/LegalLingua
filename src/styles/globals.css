@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 html {
   scroll-behavior: smooth;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   color: #387CA1;
 }
 
@@ -14,5 +17,9 @@ html {
 }
 
 .filled-button {
-  @apply bg-blue text-white px-8 py-2 rounded;
+  @apply bg-blue text-white font-bold px-8 py-2 rounded;
+}
+
+.blue-text {
+  @apply text-blue
 }
