@@ -13,10 +13,13 @@ export default function App() {
     <Navbar shouldHideOnScroll>
       <NavbarBrand>
         <Link color="foreground" href="/">
-          <p className="font-bold text-inherit">Legalingua</p>
+          <p className="font-bold text-inherit text-xl">LegalLingua</p>
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {/* Other Navbar content */}
+      </NavbarContent>
+      <NavbarContent justify="end">
         <NavbarItem>
           <Link color="foreground" href="/">
             About
@@ -31,16 +34,6 @@ export default function App() {
           <Link color="foreground" href="/">
             Contact
           </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="Team">Team</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
