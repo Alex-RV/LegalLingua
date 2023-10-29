@@ -121,7 +121,7 @@ export default function Home() {
             let summary;
             try {
                 summary = await performInference(
-                    "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
+                    "randolfuy09@gmail.com/llama-2-13b-chat-2023-10-29-11-19-30",
                     `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
                 );
             } catch (err) {
