@@ -20,6 +20,10 @@ html {
   @apply bg-blue text-white font-bold px-8 py-2 rounded;
 }
 
+.outlined-button {
+  @apply border border-blue bg-white text-blue font-bold px-8 py-2 rounded;
+}
+
 .blue-text {
   @apply text-blue
 }
