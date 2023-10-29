@@ -6,10 +6,8 @@ import Hero from '../components/Hero';
 import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
 import  ChatDisplay from '../components/ChatDisplay';
-import ProgressBar from '../NexUIComponents/ProgressBar';
-import Table from '../NexUIComponents/Table'
-import Input from '../NexUIComponents/input';
-import Button from '../NexUIComponents/Button';
+import TextArea from '../NexUIComponents/TextArea';
+
 
 import { InferenceResponse } from '../../lib/interfaces';
 
@@ -99,7 +97,7 @@ export default function Home() {
       for (let i = 0; i < summaryText.length; i++) {
         setTimeout(() => {
           setSummary((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
-        }, i * 100); // Delay the execution to create a typing effect
+        }, i * 10); // Delay the execution to create a typing effect
       }
       
       
@@ -110,10 +108,10 @@ export default function Home() {
       );
       setTranslation(''); // Clearing the chat text
       
-      for (let i = 0; i < summaryText.length; i++) {
+      for (let i = 0; i < translation?.output.choices[0].text.length; i++) {
         setTimeout(() => {
-          setTranslation((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
-        }, i * 100); // Delay the execution to create a typing effect
+          setTranslation((prevText) => prevText + translation?.output.choices[0].text[i]); // Update the chat text one letter at a time
+        }, i * 10); // Delay the execution to create a typing effect
       }
       console.log("translation:", translation?.output.choices[0].text);
       
@@ -178,13 +176,10 @@ export default function Home() {
           handleUpload();
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
-        <div className="border shadow-lg p-3 w-full mt-2">
+        <div className="border shadow-lg p-3 w-full mt-9" style={{display: 'flex', flexDirection:'row'}}>
           
-          <ChatDisplay  chatText={summary} /> 
-          <ChatDisplay  chatText = {translation} /> 
-          <ProgressBar/>
-          <Table/>
-          <Input/>
+            <TextArea title={"Summary"}  chatText={summary} /> 
+            <TextArea  title={"Translation"} chatText = {translation} /> 
           
           
         </div>
@@ -193,4 +188,3 @@ export default function Home() {
     </div>
   );
 }
-

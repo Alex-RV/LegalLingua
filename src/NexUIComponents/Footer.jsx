@@ -5,7 +5,7 @@ export default function App() {
   return (
     <Card>
       <CardBody>
-        <p>Coded in CalHacks 💙 </p>
+        <p>Made with love By Legalingua💙 </p>
       </CardBody>
     </Card>
   );
