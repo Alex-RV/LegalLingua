@@ -177,7 +177,7 @@ return (
       <meta name='description' content='Generated Legalingua' />
     </Head>
     
-    <Hero heading='Translate' message='Experience it live' />
+    <Hero heading='Translate' message='Experience it live' redirect=''/>
     
     <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-20">
       <div className="mt-8 text-center">

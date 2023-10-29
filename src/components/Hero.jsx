@@ -13,7 +13,7 @@ const Hero = ({ heading, message, redirect }) => {
       <div className="p-5 text-white z-[2] mt-[-10rem]">
         <h2 className="text-6xl font-bold">{heading}</h2>
         <p className="py-5 text-xl max-w-xl">{message}</p>
-        <button className="filled-button border">{redirect}</button>
+        {redirect && <button className="filled-button border">{redirect}</button>}
       </div>
     </div>
   );

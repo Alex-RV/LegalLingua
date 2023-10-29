@@ -7,35 +7,46 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 export default function App() {
   return (
-    <Navbar shouldHideOnScroll>
-      <NavbarBrand>
-        <Link color="foreground" href="/">
-          <p className="font-bold text-inherit text-xl">LegalLingua</p>
+    <div>
+      {/* Banner */}
+      <div className="border bg-blue text-blue text-center py-2">
+        <Link href="translate" aria-current="page">
+          AI Summary Assistance for your legal documents. Skip the jargon now
+          &nbsp;
+          <AiOutlineArrowRight className="h-[20px] w-[20px]" />
         </Link>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {/* Other Navbar content */}
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
+      </div>
+      <Navbar shouldHideOnScroll>
+        <NavbarBrand>
           <Link color="foreground" href="/">
-            About
+            <p className="font-bold text-inherit text-xl">LegalLingua</p>
           </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="translate" aria-current="page">
-            Translate
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/">
-            Contact
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+        </NavbarBrand>
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          {/* Other Navbar content */}
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Link color="foreground" href="/">
+              About
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive>
+            <Link href="translate" aria-current="page">
+              Translate
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link color="foreground" href="/">
+              Contact
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+    </div>
   );
 }
