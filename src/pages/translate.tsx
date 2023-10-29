@@ -194,9 +194,9 @@ return (
     
     <Hero heading='Translate' message='Experience it live' redirect=''/>
     
-    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32 ">
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-10 md:mx-32 lg:mx-32">
       <div className="mt-8 text-center">
-        <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
+        <h2 className="text-2xl font-bold mb-3">Upload your PDF file here</h2>
       </div>
 
       <label className="cursor-pointer border-2 border-dashed rounded-md p-4 mb-4 bg-white">
@@ -214,11 +214,15 @@ return (
       <select 
         value={selectedModel}
         onChange={(e) => setSelectedModel(e.target.value)}
-        className="mb-4 p-2 border rounded-md"
-      >
-        <option value="llama-2-7b-chat-2023-10-28-11-55-42">Llama 2-7b (Stable: Best for key points and highlighting important values)</option>
-        <option value="LLaMA-2-7B-32K-2023-10-28-22-52-16">LLaMA-2-7B-32K (Summarization: Best for compressing large texts and minimalizing)</option>
-      </select>
+        className="mb-4 p-2 border rounded-md w-full text-sm md:text-base"
+    >
+        <option value="llama-2-7b-chat-2023-10-28-11-55-42">
+            Llama 2-7b (Stable: Key points & highlights)
+        </option>
+        <option value="LLaMA-2-7B-32K-2023-10-28-22-52-16">
+            LLaMA-2-7B-32K (Summarization: Compress & minimalize)
+        </option>
+    </select>
 
       {loading && <LoadingSpinner />}
       
@@ -231,7 +235,7 @@ return (
       </button>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full mb-4">
         <TextArea title="Summary" chatText={summary} /> 
         <TextArea title="Translation" chatText={translation} /> 
       </div>
