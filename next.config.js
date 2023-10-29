@@ -4,7 +4,7 @@ const nextConfig = {
 }
 
 module.exports = {
-  // ...nextConfig,
+  ...nextConfig,
   images: {
     domains: [
       'images.unsplash.com',
