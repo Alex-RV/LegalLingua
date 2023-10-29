@@ -7,6 +7,7 @@ import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
 import  ChatDisplay from '../components/ChatDisplay';
 import TextArea from '../NexUIComponents/TextArea';
+import { PDFDocument } from 'pdf-lib';
 
 
 import { InferenceResponse } from '../../lib/interfaces';
@@ -79,54 +80,95 @@ export default function Home() {
 
   const handleUpload = async () => {
     setLoading(true);
-    console.log("FIle",selectedFile);
+    console.log("File", selectedFile);
     if (selectedFile) {
-      try{ 
-      const text = await convertPDFToText(selectedFile);
-      console.log("TEXT",text);
-      const summary: InferenceResponse | null = await performInference(
-        "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
-        `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
-      );
-      
-      const summaryText = summary?.output.choices[0].text || ''; // Getting the summary response text
-      
-      setLoading(true);
-      setSummary(''); // Clearing the chat text
-      
-      for (let i = 0; i < summaryText.length; i++) {
-        setTimeout(() => {
-          setSummary((prevText) => prevText + summaryText[i]); // Update the chat text one letter at a time
-        }, i * 10); // Delay the execution to create a typing effect
-      }
-      
-      
-      const translation: InferenceResponse | null = await performInference(
-        "togethercomputer/llama-2-70b-chat",
-        `<s>[INST]<<SYS>>\ntranslate this text from english to  ${selectedLanguage}. Output should only be in  ${selectedLanguage}.\n<</SYS>>\n ${summary?.output.choices[0].text}[/INST]`,
-       
-      );
-      setTranslation(''); // Clearing the chat text
-      
-      if(translation){
-      for (let i = 0; i < translation?.output.choices[0].text.length; i++) {
-        setTimeout(() => {
-          setTranslation((prevText) => prevText + translation?.output.choices[0].text[i]); // Update the chat text one letter at a time
-        }, i * 10); // Delay the execution to create a typing effect
-      }
-      console.log("translation:", translation?.output.choices[0].text);
-      }
-      }catch(error) {
-        console.error("Error:", error);
-      } finally {
-        setLoading(false);
-      }
+        try {
+            const uploadedPdfBuffer = await selectedFile.arrayBuffer();
+
+            // Load the PDF into pdf-lib
+            const pdfDoc = await PDFDocument.load(uploadedPdfBuffer);
+
+            // Serialize the loaded PDF (this will inherently compress the PDF)
+            const compressedPdfBytes = await pdfDoc.save();
+
+            const sizeLimitMB = 10;
+            const sizeLimitBytes = sizeLimitMB * 1024 * 1024;
+            console.log(compressedPdfBytes.length);
+
+            if (compressedPdfBytes.length > sizeLimitBytes) {
+                alert(`The compressed PDF is larger than ${sizeLimitMB}MB. Please upload a smaller PDF.`);
+                return;
+            }
+
+            const compressedPdfBlob = new Blob([compressedPdfBytes], { type: 'application/pdf' });
+
+            const compressedPdfFile = new File([compressedPdfBlob], selectedFile.name, {
+                type: 'application/pdf',
+                lastModified: selectedFile.lastModified
+            });
+
+            let text;
+            try {
+                text = await convertPDFToText(compressedPdfFile);
+            } catch (err) {
+                throw new Error("Error converting PDF to text: " + err);
+            }
+
+            console.log("TEXT", text);
+
+            let summary;
+            try {
+                summary = await performInference(
+                    "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
+                    `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
+                );
+            } catch (err) {
+                throw new Error("Error performing inference for summary: " + err);
+            }
+
+            const summaryText = summary?.output.choices[0].text || '';
+
+            setLoading(true);
+            setSummary('');
+
+            for (let i = 0; i < summaryText.length; i++) {
+                setTimeout(() => {
+                    setSummary((prevText) => prevText + summaryText[i]);
+                }, i * 10);
+            }
+
+            let translation: InferenceResponse | null;
+            try {
+                translation = await performInference(
+                    "togethercomputer/llama-2-70b-chat",
+                    `<s>[INST]<<SYS>>\ntranslate this text from english to ${selectedLanguage}. Output should only be in ${selectedLanguage}.\n<</SYS>>\n ${summary?.output.choices[0].text}[/INST]`
+                );
+            } catch (err) {
+                throw new Error("Error performing inference for translation: " + err);
+            }
+
+            setTranslation('');
+
+            if (translation) {
+                for (let i = 0; i < translation?.output.choices[0].text.length; i++) {
+                    setTimeout(() => {
+                        setTranslation((prevText) => prevText + translation?.output.choices[0].text[i]);
+                    }, i * 10);
+                }
+                console.log("translation:", translation?.output.choices[0].text);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred: " + error);
+        } finally {
+            setLoading(false);
+        }
     } else {
-      alert('Please select a PDF file to upload.');
-      setLoading(false);
+        alert('Please select a PDF file to upload.');
+        setLoading(false);
     }
-  };
-  
+};
+
 
   return (
     
