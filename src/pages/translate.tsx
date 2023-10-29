@@ -176,6 +176,7 @@ export default function Home() {
           handleUpload();
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
+        
         <div className="border shadow-lg p-3 w-full mt-9" style={{display: 'flex', flexDirection:'row'}}>
           
             <TextArea title={"Summary"}  chatText={summary} /> 
@@ -183,6 +184,7 @@ export default function Home() {
           
           
         </div>
+        
         </div>
       </div>
     </div>
