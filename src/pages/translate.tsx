@@ -48,6 +48,8 @@ const languages = [
   { code: 'ms', name: 'Malay' },
   { code: 'fil', name: 'Filipino' },
   { code: 'sw', name: 'Swahili' },
+  { code: 'fa', name: 'Farsi' },
+  { code: 'nep', name: 'Nepali' },
   
 ];
 
