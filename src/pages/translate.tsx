@@ -180,7 +180,7 @@ export default function Home() {
 
 
 return (
-  <div className="container w-full min-w-full ">
+  <div className="container w-full min-w-full bg-slate-100">
     <Head>
       <title>Legalingua</title>
       <meta name='description' content='Generated Legalingua' />
@@ -188,12 +188,12 @@ return (
     
     <Hero heading='Translate' message='Experience it live' redirect=''/>
     
-    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32">
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32 ">
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
       </div>
 
-      <label className="cursor-pointer border-2 border-dashed rounded-md p-4 mb-4">
+      <label className="cursor-pointer border-2 border-dashed rounded-md p-4 mb-4 bg-white">
         <input type="file" className="hidden" onChange={handleFileChange} />
         <span className="text-gray-700">Select a file</span>
       </label>
