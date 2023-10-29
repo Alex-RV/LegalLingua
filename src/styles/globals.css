@@ -17,11 +17,11 @@ html {
 }
 
 .filled-button {
-  @apply bg-blue text-white font-bold px-8 py-2 rounded;
+  @apply bg-blue text-white font-bold px-8 py-2 rounded text-center;
 }
 
 .outlined-button {
-  @apply border border-blue bg-white text-blue font-bold px-8 py-2 rounded;
+  @apply border border-blue bg-white text-blue font-bold px-8 py-2 rounded text-center;
 }
 
 .blue-text {

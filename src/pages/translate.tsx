@@ -214,7 +214,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-3">Upload your PDF file</h2>
         </div>
 
-        <label className="cursor-pointer filled-button">
+        <label className="cursor-pointer filled-button w-1/5">
           <input type="file" className="hidden" onChange={handleFileChange} />
           <span>Select a file</span>
         </label>
@@ -224,7 +224,7 @@ export default function Home() {
         )}
 
         <h2 className="text-2xl font-bold mb-3 mt-8">Language Selection</h2>
-        <div className="outlined-button">
+        <div className="outlined-button w-1/5">
           <LanguageSelector
             languages={languages}
             onSelectLanguage={handleLanguageChange}
@@ -235,7 +235,7 @@ export default function Home() {
         <select
           value={selectedModel}
           onChange={(e) => setSelectedModel(e.target.value)}
-          className="outlined-button"
+          className="outlined-button w-1/3"
         >
           <option value="llama-2-7b-chat-2023-10-28-11-55-42">
             Llama 2-7b (Stable: Key points & highlights)
@@ -250,17 +250,26 @@ export default function Home() {
         {selectedLanguage && (
           <button
             onClick={handleUpload}
-            className="bg-sky-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            className="w-1/3 bg-light-blue hover:bg-blue text-white font-bold py-2 px-4 rounded mt-4"
           >
             Translate
           </button>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full mb-4">
-          <div className="blue-text"> 
-          <TextArea title="Summary" chatText={summary} />
+          <div>
+            <div className="blue-text font-bold text-center py-2 text-lg">
+              Summarised Output
+            </div>
+            <TextArea title="Summary" chatText={summary} />
           </div>
-          <TextArea title="Translation" chatText={translation} />
+          <div>
+            <div className="blue-text font-bold text-center py-2 text-lg">
+              Summarised Output (with Translation)
+            </div>
+            <TextArea title="Translation" chatText={translation} />
+          </div>
+          
         </div>
       </div>
     </div>
