@@ -6,6 +6,9 @@ import Hero from '../components/Hero';
 import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
 import  ChatDisplay from '../components/ChatDisplay';
+import ProgressBar from '../NexUIComponents/ProgressBar';
+import Table from '../NexUIComponents/Table'
+import Input from '../NexUIComponents/input';
 
 import { InferenceResponse } from '../../lib/interfaces';
 
@@ -181,7 +184,9 @@ export default function Home() {
           
           <ChatDisplay title={"Summary"} chatText={summary} /> 
           <ChatDisplay title={ "Native" } chatText = {translation} /> 
-          
+          <ProgressBar/>
+          <Table/>
+          <Input/>
           
         </div>
         </div>

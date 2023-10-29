@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../NexUIComponents/Navbar';
 
 const Hero = ({heading, message}) => {
   return (
