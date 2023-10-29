@@ -194,7 +194,7 @@ return (
     
     <Hero heading='Translate' message='Experience it live' redirect=''/>
     
-    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32 ">
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-10 md:mx-32 lg:mx-32">
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
       </div>
@@ -235,7 +235,7 @@ return (
       </button>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full mb-4">
         <TextArea title="Summary" chatText={summary} /> 
         <TextArea title="Translation" chatText={translation} /> 
       </div>
