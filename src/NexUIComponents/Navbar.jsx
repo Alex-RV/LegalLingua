@@ -40,11 +40,6 @@ export default function App() {
               Translate
             </Link>
           </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="/">
-              Contact
-            </Link>
-          </NavbarItem>
         </NavbarContent>
       </Navbar>
     </div>

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Hero from "../components/Hero";
 import AccordionComponent from "../NexUIComponents/Acordion";
 import TextArea from "../NexUIComponents/TextArea";
+import { Link } from "@nextui-org/react";
 
 export default function Home() {
   const [summary, setSummary] = useState("");
@@ -33,7 +34,7 @@ export default function Home() {
             No more second-guessing.
           </>
         }
-        redirect="Try LegalLingua"
+        redirect={<Link className="text-white" href="/translate">Try LegalLingua</Link>}
       />
       <div className="border shadow-lg p-30 w-full mt-9 flex-row">
         <AccordionComponent />
