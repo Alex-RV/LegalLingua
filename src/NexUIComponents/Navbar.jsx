@@ -19,17 +19,17 @@ export default function App() {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="/">
-            Story
+            About
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="translate" aria-current="page">
-            mvp
+            Translate
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="translate">
-            Integrations
+          <Link color="foreground" href="/">
+            Contact
           </Link>
         </NavbarItem>
       </NavbarContent>

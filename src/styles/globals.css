@@ -10,3 +10,7 @@ html {
 .custom-img {
   background-image: url('https://images.pexels.com/photos/3771097/pexels-photo-3771097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
 }
+
+.filled-button {
+  @apply bg-blue text-white px-8 py-2 rounded;
+}
