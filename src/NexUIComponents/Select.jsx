@@ -2,10 +2,10 @@ import React from "react";
 import {Select, SelectItem} from "@nextui-org/react";
 import {animals} from "./data";
 
-export default function App() {
+export default function App(collection) {
   return (
     <Select
-      items={animals}
+      items={collection}
       label="Favorite Animal"
       placeholder="Select an animal"
       className="max-w-xs"

@@ -7,6 +7,8 @@ import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
 import  ChatDisplay from '../components/ChatDisplay';
 import TextArea from '../NexUIComponents/TextArea';
+import Loading from '../NexUIComponents/Loading';
+import Selector from '../NexUIComponents/Select'
 
 
 import { InferenceResponse } from '../../lib/interfaces';
@@ -161,7 +163,7 @@ export default function Home() {
         <div className="mt-8 text-center">
           <h2 className="text-2xl font-bold mb-10">Select your Language</h2>
         </div>
-
+      
         <LanguageSelector
         
           languages={languages}
@@ -172,12 +174,12 @@ export default function Home() {
 
         <div>
      
-        {loading && <LoadingSpinner/>}
+        {loading && <Loading/>}
         {selectedLanguage !== '' && <button onClick={() => {
           handleUpload();
           setLoading(true);
         }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
-        
+
         <div className="border shadow-lg p-3 w-full mt-9" style={{display: 'flex', flexDirection:'row'}}>
           
             <TextArea title={"Summary"}  chatText={summary} /> 
