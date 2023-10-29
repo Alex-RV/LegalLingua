@@ -3,7 +3,7 @@ import { InferenceResponse } from "./interfaces";
 export async function performInference(
     model: string,
     prompt: string,
-    stop: string = '',
+    stop: string = null,
     temperature: number = 0.7,
     top_p: number = 0.7,
     top_k: number = 50,
@@ -18,7 +18,7 @@ export async function performInference(
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       "Access-Control-Allow-Headers" : "Content-Type",
-      "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     };
   
