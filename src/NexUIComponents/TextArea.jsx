@@ -6,9 +6,10 @@ export default function App({title, chatText }) {
     <Textarea
       label= {title}
       labelPlacement="outside"
-      placeholder="Enter your description"
-      className="border shadow-lg p-3 w-full mt-2"
+      placeholder="Text will appear here"
+      className="border shadow-lg p-3 w-full mt-2 larger-textarea"
       value={chatText}
+      style={{ height: '300px', fontSize: '20px' }}
     />
   );
 }
