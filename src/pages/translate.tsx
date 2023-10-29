@@ -173,7 +173,7 @@ export default function Home() {
 
 
 return (
-  <div className="container w-full min-w-full justify-center items-center">
+  <div className="container w-full min-w-full ">
     <Head>
       <title>Legalingua</title>
       <meta name='description' content='Generated Legalingua' />
@@ -181,7 +181,7 @@ return (
     
     <Hero heading='Translate' message='Experience it live' />
     
-    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-20">
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32">
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
       </div>
@@ -197,37 +197,23 @@ return (
 
       <h2 className="text-2xl font-bold mb-3 mt-8">Select a Language</h2>
       <LanguageSelector languages={languages} onSelectLanguage={handleLanguageChange} />
-        {/* Language Selector */}
-        <div className="mt-8 text-center">
-          <h2 className="text-2xl font-bold mb-10">Select your Language</h2>
-        </div>
+
+      {loading && <LoadingSpinner />}
       
-        <LanguageSelector
-        
-          languages={languages}
-          onSelectLanguage={handleLanguageChange}
-          
-        />
-        
+      {selectedLanguage && (
+        <button 
+          onClick={handleUpload} 
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4'
+        >
+          Translate
+        </button>
+      )}
 
-        <div>
-     
-        {loading && <Loading/>}
-        {selectedLanguage !== '' && <button onClick={() => {
-          handleUpload();
-          setLoading(true);
-        }} className='border shadow-lg p-3 w-full mt-2 '>Submit</button>}
-
-        <div className="border shadow-lg p-3 w-full mt-9" style={{display: 'flex', flexDirection:'row'}}>
-          
-            <TextArea title={"Summary"}  chatText={summary} /> 
-            <TextArea  title={"Translation"} chatText = {translation} /> 
-          
-          
-        </div>
-        
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full">
+        <TextArea title="Summary" chatText={summary} /> 
+        <TextArea title="Translation" chatText={translation} /> 
       </div>
     </div>
+  </div>
 );
 }
