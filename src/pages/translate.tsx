@@ -84,7 +84,7 @@ export default function Home() {
     if (selectedFile) {
       try{ 
       const text = await convertPDFToText(selectedFile);
-      console.log(text);
+      console.log("TEXT",text);
       const summary: InferenceResponse | null = await performInference(
         "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
         `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
@@ -103,12 +103,9 @@ export default function Home() {
       
       
       const translation: InferenceResponse | null = await performInference(
-        "togethercomputer/RedPajama-INCITE-7B-Chat",
-        `Q: Translate the following to ${selectedLanguage}, only output the ${selectedLanguage} text: ${summary?.output.choices[0].text}\nA:`,
-        0.2,
-        undefined,
-        undefined,
-        1000
+        "togethercomputer/llama-2-70b-chat",
+        `<s>[INST]<<SYS>>\ntranslate this text from english to  ${selectedLanguage}. Output should only be in  ${selectedLanguage}.\n<</SYS>>\n ${summary?.output.choices[0].text}[/INST]`,
+       
       );
       setTranslation(''); // Clearing the chat text
       
