@@ -18,7 +18,7 @@ export default function App() {
         <TableRow key="2">
           <TableCell>Aleks</TableCell>
           <TableCell>🇷🇺</TableCell>
-          <TableCell>I've got troubles signing my lease...</TableCell>
+          <TableCell>I&apos;ve got troubles signing my lease...</TableCell>
         </TableRow>
         <TableRow key="3">
           <TableCell>Gabe</TableCell>
@@ -28,7 +28,7 @@ export default function App() {
         <TableRow key="4">
           <TableCell>Xiang</TableCell>
           <TableCell>🇸🇬</TableCell>
-          <TableCell>I don't understand my work contract!</TableCell>
+          <TableCell>I don&apos;t understand my work contract!</TableCell>
         </TableRow>
       </TableBody>
     </Table>
