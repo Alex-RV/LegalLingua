@@ -11,21 +11,29 @@ const transcribeImage = async (pngDataUrl: string) => {
   return text;
 };
 
-const GVTI = async(pngDataUrl:string) =>{
-    const response = await fetch('https://alex-riabov.vercel.app/api/upload-pdf', {
+const GVTI = async (pngDataUrl: string): Promise<string[]> => {
+    try {
+      const response = await fetch('https://ariabov.vercel.app/api/upload-pdf', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          responseType: "arraybuffer",
-          responseEncoding: "binary",
         },
         body: JSON.stringify({ pngDataUrl }),
       });
-    
+      
+      if (!response.ok) {
+        throw new Error(`API returned status: ${response.status}`);
+      }
+  
       const data = await response.json();
-      const text = data && data.text ? data.text : [];
-      return text;
-}
+      
+      return data.text;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  };
+  
 
 export const convertPDFToText = async (pdfFile: File) => {
   return new Promise<string>(async (resolve, reject) => {
