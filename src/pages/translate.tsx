@@ -87,9 +87,13 @@ export default function Home() {
       const text = await convertPDFToText(selectedFile);
       console.log("TEXT",text);
       const summary: InferenceResponse | null = await performInference(
-        "randolfuy09@gmail.com/llama-2-7b-chat-2023-10-28-11-55-42",
-        `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`
-      );
+        "randolfuy09@gmail.com/LLaMA-2-7B-32K-2023-10-28-22-52-16",
+        `summarize this text and give your answer between <summary></summary> tags. text: ${text} <summary>  </summary>`,
+        0.7, 
+        0.7, 
+        50,  
+        10000  
+    );
       
       const summaryText = summary?.output.choices[0].text || ''; // Getting the summary response text
       
