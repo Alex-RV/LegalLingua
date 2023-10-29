@@ -30,6 +30,7 @@ export async function performInference(
   
     try {
       const response = await fetch(apiUrl, {
+        mode: 'no-cors',
         method: "POST",
         headers,
         body: JSON.stringify(data),
