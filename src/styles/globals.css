@@ -8,5 +8,6 @@ html {
 }
 
 .custom-img {
-  background-image: '/Users/juanestrada/Desktop/LegalLingua/public/back.png';
+  background-image: url('https://images.pexels.com/photos/18731286/pexels-photo-18731286/free-photo-of-long-exposure-photo-of-the-stars.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  
 }
