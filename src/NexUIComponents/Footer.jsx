@@ -5,7 +5,7 @@ export default function App() {
   return (
     <Card>
       <CardBody>
-        <p>Made with love By Legalingua💙 </p>
+        <p>Made with Love by LegalLingua 💙</p>
       </CardBody>
     </Card>
   );

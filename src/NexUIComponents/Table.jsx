@@ -25,6 +25,11 @@ export default function App() {
           <TableCell>🇵🇭</TableCell>
           <TableCell>I still have to translate the Bank letters!</TableCell>
         </TableRow>
+        <TableRow key="4">
+          <TableCell>Xiang</TableCell>
+          <TableCell>🇵🇭</TableCell>
+          <TableCell>I still have to translate the Bank letters!</TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
