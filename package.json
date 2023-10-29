@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/vision": "^4.0.2",
     "@nextui-org/react": "^2.1.13",
     "@vercel/analytics": "^1.1.1",
     "cn": "^0.1.1",

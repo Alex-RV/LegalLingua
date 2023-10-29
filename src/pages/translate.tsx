@@ -7,6 +7,8 @@ import LanguageSelector from '../components/LanguageSelector';
 import LoadingSpinner from '../components/Loading';
 import  ChatDisplay from '../components/ChatDisplay';
 import TextArea from '../NexUIComponents/TextArea';
+import Loading from '../NexUIComponents/Loading';
+import Selector from '../NexUIComponents/Select'
 import { PDFDocument } from 'pdf-lib';
 
 
@@ -171,7 +173,7 @@ export default function Home() {
 
 
 return (
-  <div className="container w-full min-w-full justify-center items-center">
+  <div className="container w-full min-w-full ">
     <Head>
       <title>Legalingua</title>
       <meta name='description' content='Generated Legalingua' />
@@ -179,7 +181,7 @@ return (
     
     <Hero heading='Translate' message='Experience it live' redirect=''/>
     
-    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-20">
+    <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-32">
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
       </div>

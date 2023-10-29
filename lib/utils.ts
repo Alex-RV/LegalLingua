@@ -13,7 +13,7 @@ const transcribeImage = async (pngDataUrl: string) => {
 
 const GVTI = async (pngDataUrl: string): Promise<string[]> => {
     try {
-      const response = await fetch('https://ariabov.vercel.app/api/upload-pdf', {
+      const response = await fetch('/api/upload-pdf', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
