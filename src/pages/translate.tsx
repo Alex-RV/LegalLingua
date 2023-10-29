@@ -196,7 +196,7 @@ return (
     
     <div id='translate' className="min-h-screen flex flex-col items-center justify-center mt-8 mx-10 md:mx-32 lg:mx-32">
       <div className="mt-8 text-center">
-        <h2 className="text-2xl font-bold mb-3">Upload your file</h2>
+        <h2 className="text-2xl font-bold mb-3">Upload your PDF file here</h2>
       </div>
 
       <label className="cursor-pointer border-2 border-dashed rounded-md p-4 mb-4 bg-white">
