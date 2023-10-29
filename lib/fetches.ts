@@ -3,11 +3,12 @@ import { InferenceResponse } from "./interfaces";
 export async function performInference(
     model: string,
     prompt: string,
+    stop: string = '',
     temperature: number = 0.7,
     top_p: number = 0.7,
     top_k: number = 50,
-    max_tokens: number = 500,
-    repetition_penalty: number = 1
+    max_tokens: number = 700,
+    repetition_penalty: number = 1,
   ): Promise<InferenceResponse | null> {
     const apiUrl = "https://api.together.xyz/inference";
     const token = process.env.NEXT_PUBLIC_TOGETHERAI_KEY;
@@ -24,6 +25,7 @@ export async function performInference(
     const data = {
       model,
       prompt,
+      stop,
       temperature,
       top_p,
       top_k,

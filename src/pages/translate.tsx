@@ -122,16 +122,20 @@ export default function Home() {
             console.log("TEXT", text);
 
             let summary;
+            let stop ="";
             let prompt = "";
             if (selectedModel === "llama-2-7b-chat-2023-10-28-11-55-42") {
                 prompt = `Q: Please provide a concise summary of the following document, emphasizing the key terms, obligations, rights, penalties, and any potential risks or liabilities: ${text}\nA:`;
+                stop = "</s>"
             } else if (selectedModel === "LLaMA-2-7B-32K-2023-10-28-22-52-16") {
                 prompt = `summarize this text and give your answer between <summary></summary> tags. text: ${text} <summary>`;
+                stop = "</summary>"
             }
             try {
                 summary = await performInference(
                   `randolfuy09@gmail.com/${selectedModel}`,
-                  prompt
+                  prompt,
+                  stop,
               );
             } catch (err) {
                 throw new Error("Error performing inference for summary: " + err);
