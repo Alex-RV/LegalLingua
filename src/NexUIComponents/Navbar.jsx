@@ -13,8 +13,8 @@ export default function App() {
   return (
     <div>
       {/* Banner */}
-      <div className="border bg-blue text-blue text-center py-2">
-        <Link href="translate" aria-current="page">
+      <div className="bg-black text-center py-2">
+        <Link href="translate" aria-current="page" className="text-white">
           AI Summary Assistance for your legal documents. Skip the jargon now
           &nbsp;
           <AiOutlineArrowRight className="h-[20px] w-[20px]" />
