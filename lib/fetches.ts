@@ -3,7 +3,7 @@ import { InferenceResponse } from "./interfaces";
 export async function performInference(
     model: string,
     prompt: string,
-    stop: string = null,
+    stop: [string | string[]] = null,
     temperature: number = 0.7,
     top_p: number = 0.7,
     top_k: number = 50,
