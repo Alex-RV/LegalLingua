@@ -3,6 +3,9 @@ import Head from 'next/head';
 import Hero from '../components/Hero';
 import AccordionComponent from '../NexUIComponents/Acordion';
 import TextArea from '../NexUIComponents/TextArea';
+import Table from '../NexUIComponents/Table';
+
+
 
 export default function Home() {
   const [summary, setSummary] = useState('');
@@ -23,13 +26,13 @@ export default function Home() {
         <meta name='description' content='Generated Legalingua' />
       </Head>
       <Hero heading='LegalLingua' message='AI tool that instantly explains your legal document to you, in your language of choice. No more second-guessing.' />
-      <div className="border shadow-lg p-30 w-full mt-9 flex-row">
-        <AccordionComponent/>
-        <div className="border shadow-lg p-3">
-          <h3>HELLO WORLD!</h3>
-          <TextArea title="Summary" chatText={summary} />
-        </div>
+      <div className="border shadow-lg p-3 w-50p mt-9 flex-row" style={{display: 'flex', flexDirection:'row'}}>
+        <AccordionComponent />
+        <TextArea title={"HELLO WORLD!"}  chatText={"Legalingua isn't just a project; it's a heartfelt response to the real struggles faced by immigrants."} /> 
+        
       </div>
-    </div>
+
+      <Table/>
+      </div>
   );
 }

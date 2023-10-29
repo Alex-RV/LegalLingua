@@ -6,29 +6,24 @@ export default function App() {
     <Table aria-label="Example static collection table">
       <TableHeader>
         <TableColumn>NAME</TableColumn>
-        <TableColumn>ROLE</TableColumn>
-        <TableColumn>STATUS</TableColumn>
+        <TableColumn>FROM</TableColumn>
+        <TableColumn>STORY</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow key="1">
-          <TableCell>Tony Reichert</TableCell>
-          <TableCell>CEO</TableCell>
-          <TableCell>Active</TableCell>
+          <TableCell>Juan</TableCell>
+          <TableCell>🇨🇴</TableCell>
+          <TableCell>I filled up my visa application wrong and it got delayed 9 months...</TableCell>
         </TableRow>
         <TableRow key="2">
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow key="3">
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>Active</TableCell>
+          <TableCell>Aleks</TableCell>
+          <TableCell>🇷🇺</TableCell>
+          <TableCell>I got troubles signing my lease...</TableCell>
         </TableRow>
         <TableRow key="4">
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>Vacation</TableCell>
+          <TableCell>Gabe</TableCell>
+          <TableCell>🇵🇭</TableCell>
+          <TableCell>I still have to translate the Bank letters!</TableCell>
         </TableRow>
       </TableBody>
     </Table>
