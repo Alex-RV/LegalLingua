@@ -6,6 +6,12 @@
 .pnp.js
 .yarn/install-state.gz
 
+*.docx
+*.jsonl
+/SampleLeaseData
+
+*.txt
+
 # testing
 /coverage
 
