@@ -16,6 +16,9 @@ export async function performInference(
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      "Access-Control-Allow-Headers" : "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     };
   
     const data = {
@@ -30,6 +33,7 @@ export async function performInference(
   
     try {
       const response = await fetch(apiUrl, {
+        // mode: 'no-cors',
         method: "POST",
         headers,
         body: JSON.stringify(data),
